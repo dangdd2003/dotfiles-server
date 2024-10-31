@@ -97,6 +97,8 @@ local servers = {
   -- },
   nil_ls = {}, -- comment when run "MasonInstallAll" to avoid building from source, install 'nil' from package manager instead
   nginx_language_server = {},
+  docker_compose_language_service = {},
+  dockerls = {},
 }
 
 -- setup

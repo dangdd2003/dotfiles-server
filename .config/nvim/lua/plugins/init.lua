@@ -25,6 +25,7 @@ return {
         "java",
         "nix",
         "nginx",
+        "dockerfile",
       },
     },
   },
