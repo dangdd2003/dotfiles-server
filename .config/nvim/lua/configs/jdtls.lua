@@ -48,7 +48,7 @@ end
 local function get_workspace()
   -- Get the home directory of your operating system
   local home
-  if vim.fn.has "win32" then
+  if vim.fn.has "win32" == 1 then
     home = vim.fn.getenv "HOMEPATH"
   else
     home = vim.fn.getenv "HOME"
