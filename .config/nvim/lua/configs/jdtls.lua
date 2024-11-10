@@ -178,96 +178,105 @@ local function setup_jdtls()
   -- Configure settings in the JDTLS server
   local settings = {
     java = {
-      -- Enable code formatting
-      format = {
-        enabled = true,
-        -- Use the Google Style guide for code formatting
-        -- settings = {
-        --   url = vim.fn.stdpath "config" .. "/lang_servers/intellij-java-google-style.xml",
-        --   profile = "GoogleStyle",
-        -- },
+      codeGeneration = {
+        generateComments = true,
+        hashCodeEquals = {
+          useInstanceof = true,
+          useJava7Objects = true,
+        },
+        toString = {
+          codeStyle = "String concatenation",
+          skipNullValues = false,
+          template = "${object.className} { ${member.name()}=${member.value}, ${otherMembers} }",
+        },
+        useBlocks = true,
       },
-      -- Enable downloading archives from eclipse automatically
       eclipse = {
-        downloadSource = true,
+        downloadSources = true,
       },
-      -- Enable downloading archives from maven automatically
       maven = {
         downloadSources = true,
       },
-      -- Enable method signature help
-      signatureHelp = {
-        enabled = true,
+      errors = {
+        incompleteClasspath = {
+          severity = "error",
+        },
       },
-      -- Use the fernflower decompiler when using the javap command to decompile byte code back to java code
-      contentProvider = {
-        preferred = "fernflower",
-      },
-      -- Setup automatical package import oranization on file save
-      saveActions = {
-        organizeImports = true,
-      },
-      -- Customize completion options
       completion = {
-        -- When using an unimported static method, how should the LSP rank possible places to import the static method from
-        favoriteStaticMembers = {
-          "org.hamcrest.MatcherAssert.assertThat",
-          "org.hamcrest.Matchers.*",
-          "org.hamcrest.CoreMatchers.*",
-          "org.junit.jupiter.api.Assertions.*",
-          "java.util.Objects.requireNonNull",
-          "java.util.Objects.requireNonNullElse",
-          "org.mockito.Mockito.*",
-        },
-        -- Try not to suggest imports from these packages in the code action window
-        filteredTypes = {
-          "com.sun.*",
-          "io.micrometer.shaded.*",
-          "java.awt.*",
-          "jdk.*",
-          "sun.*",
-        },
-        -- Set the order in which the language server should organize imports
         importOrder = {
           "java",
           "jakarta",
           "javax",
+          "io",
           "com",
           "org",
         },
       },
-      sources = {
-        -- How many classes from a specific package should be imported before automatic imports combine them all into a single import
-        organizeImports = {
-          starThreshold = 999,
-          staticThreshold = 999,
-        },
-      },
-      -- How should different pieces of code be generated?
-      codeGeneration = {
-        -- When generating toString use a json format
-        toString = {
-          template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-        },
-        -- When generating hashCode and equals methods use the java 7 objects method
-        hashCodeEquals = {
-          useJava7Objects = true,
-        },
-        -- When generating code use code blocks
-        useBlocks = true,
-      },
-      -- If changes to the project will require the developer to update the projects configuration advise the developer before accepting the change
       configuration = {
         updateBuildConfiguration = "interactive",
       },
-      -- enable code lens in the lsp
+      format = {
+        enabled = true,
+        comments = {
+          enabled = true,
+        },
+        settings = {
+          url = "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/eclipse-java-google-style.xml",
+        },
+      },
+      implementationsCodeLens = {
+        enabled = true,
+      },
       referencesCodeLens = {
         enabled = true,
       },
-      -- enable inlay hints for parameter names,
-      inlayHints = {
+      inlayhints = {
         parameterNames = {
           enabled = "all",
+        },
+      },
+      jdt = {
+        ls = {
+          androidSupport = {
+            enabled = true,
+          },
+          lombokSupport = {
+            enabled = true,
+          },
+        },
+      },
+      maxConcurrentBuilds = 5,
+      references = {
+        includeAccessors = true,
+        includeDecompiledSources = true,
+      },
+      rename = {
+        enabled = true,
+      },
+      saveActions = {
+        organizeImports = false,
+      },
+      signatureHelp = {
+        enabled = true,
+        description = {
+          enabled = true,
+        },
+      },
+      sources = {
+        organizeImports = {
+          starThreshold = 999,
+          staticStarThreshold = 999,
+        },
+      },
+      templates = {
+        typeComment = {
+          "/**",
+          " * @Filename ${file_name}",
+          " * @Author Doan Dinh Dang",
+          " * @Date ${date}",
+          " * @Description",
+          " *",
+          " */",
         },
       },
     },
